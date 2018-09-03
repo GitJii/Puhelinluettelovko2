@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   addPerson = (event) => {
-    console.log('moi')
     event.preventDefault()
     const personObject = {
       name: this.state.newName,
@@ -27,7 +26,6 @@ class App extends React.Component {
     }
 
     const persons = this.state.persons.concat(personObject)
-    console.log(persons)
     
     this.setState({
       persons,
@@ -36,15 +34,10 @@ class App extends React.Component {
     
   }
 
-
-
   render() {
     return (
-  
-  
       <div>
         <h2>Puhelinluettelo</h2>
-        
           <form onSubmit={this.addPerson}>
           <div>
             nimi: <input 
@@ -59,26 +52,6 @@ class App extends React.Component {
           <h2>Numerot</h2>
           {this.state.persons.map(person => <li key={person.id}> {person.name}</li>)}
       </div>
-  /*
-  <div>
-        <h2>Puhelinluettelo</h2>
-        <form>
-          <div>
-            nimi: <input 
-              value={this.state.newName}
-              onChange={this.handlePersonChange}
-            />
-          </div>
-          <form onSubmit={this.addPerson}>
-            <button type="submit">lisää</button>
-          </form>
-        </form>
-        <h2>Numerot</h2>
-        <ul>
-          {this.state.persons.map(person => <li key={person.id}> {person.name}</li>)}
-        </ul>
-      </div>
-  */
     )
   }
 }
