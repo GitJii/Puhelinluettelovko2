@@ -5,7 +5,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       persons: [
-        { name: 'Arto Hellas',
+        {
+          name: 'Arto Hellas',
           id: 1
         }
       ],
@@ -15,42 +16,48 @@ class App extends React.Component {
 
   handlePersonChange = (event) => {
     console.log(event.target.value)
-    this.setState({newName: event.target.value})
+    this.setState({ newName: event.target.value })
   }
 
   addPerson = (event) => {
     event.preventDefault()
+
     const personObject = {
       name: this.state.newName,
-      id: this.state.persons.length + 1      
+      id: this.state.persons.length + 1
     }
 
-    const persons = this.state.persons.concat(personObject)
-    
+    const double = this.state.persons.find(person => person.name === personObject.name)
+
+    const persons =
+      this.state.persons.includes(double) ?
+        this.state.persons :
+        this.state.persons.concat(personObject)
+
     this.setState({
       persons,
       newName: ''
     })
-    
   }
 
   render() {
+
     return (
       <div>
         <h2>Puhelinluettelo</h2>
-          <form onSubmit={this.addPerson}>
+        <form onSubmit={this.addPerson}>
           <div>
-            nimi: <input 
+            nimi: <input
               value={this.state.newName}
               onChange={this.handlePersonChange}
             />
-            </div>
-            <div>
+          </div>
+          <div>
             <button type="submit">lisää</button>
-            </div>
-          </form>
-          <h2>Numerot</h2>
-          {this.state.persons.map(person => <li key={person.id}> {person.name}</li>)}
+          </div>
+        </form>
+        <h2>Numerot</h2>
+        {this.state.persons.map(person => <li key={person.id}> {person.name}</li>)}
       </div>
     )
   }
