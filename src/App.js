@@ -9,10 +9,31 @@ class App extends React.Component {
           name: 'Arto Hellas',
           number: '040 2398243',
           id: 1
+        },
+        {
+          name: 'Arto Vihavainen',
+          number: '040 2398243',
+          id: 2
+        },
+        {
+          name: 'Arto Termospullo',
+          number: '040 2398243',
+          id: 3
+        },
+        {
+          name: 'Arsi Harju',
+          number: '040 2398243',
+          id: 4
+        },
+        {
+          name: 'Pena Markkanen',
+          number: '040 2398243',
+          id: 5
         }
       ],
       newName: '',
-      newNumber: ''
+      newNumber: '',
+      filter: ''
     }
   }
 
@@ -20,6 +41,11 @@ class App extends React.Component {
   handleNumberChange = (event) => {
     console.log(event.target.value)
     this.setState({ newNumber: event.target.value })
+  }
+
+  handleFilterChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ filter: event.target.value })
   }
 
   handlePersonChange = (event) => {
@@ -52,9 +78,23 @@ class App extends React.Component {
 
   render() {
 
+    const personsToShow = 
+      this.state.filter === '' ?
+        this.state.persons : 
+        this.state.persons.filter(person =>
+           person.name.includes(this.state.filter))
+
     return (
       <div>
         <h2>Puhelinluettelo</h2>
+
+        rajaa näytettäviä <input
+        value = {this.state.filter}
+        onChange= {this.handleFilterChange}
+
+        />
+        
+        <h2>Lisää uusi</h2>
         <form onSubmit={this.addPersonAndNumber}>
           <div>
             nimi: <input
@@ -73,7 +113,8 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-        {this.state.persons.map(person => <li key={person.id}> {person.name} {person.number}</li>)}
+          {personsToShow.map(person => <li key={person.id}>
+          {person.name} {person.number}</li>)}
       </div>
     )
   }
