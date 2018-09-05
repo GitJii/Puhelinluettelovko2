@@ -7,11 +7,19 @@ class App extends React.Component {
       persons: [
         {
           name: 'Arto Hellas',
+          number: '040 2398243',
           id: 1
         }
       ],
-      newName: ''
+      newName: '',
+      newNumber: ''
     }
+  }
+
+
+  handleNumberChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newNumber: event.target.value })
   }
 
   handlePersonChange = (event) => {
@@ -19,11 +27,12 @@ class App extends React.Component {
     this.setState({ newName: event.target.value })
   }
 
-  addPerson = (event) => {
+  addPersonAndNumber = (event) => {
     event.preventDefault()
 
     const personObject = {
       name: this.state.newName,
+      number: this.state.newNumber,
       id: this.state.persons.length + 1
     }
 
@@ -36,6 +45,7 @@ class App extends React.Component {
 
     this.setState({
       persons,
+      newNumber: '',
       newName: ''
     })
   }
@@ -45,7 +55,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Puhelinluettelo</h2>
-        <form onSubmit={this.addPerson}>
+        <form onSubmit={this.addPersonAndNumber}>
           <div>
             nimi: <input
               value={this.state.newName}
@@ -53,11 +63,17 @@ class App extends React.Component {
             />
           </div>
           <div>
+            numero: <input
+              value={this.state.newNumber}
+              onChange={this.handleNumberChange}
+            />
+          </div>
+          <div>
             <button type="submit">lisää</button>
           </div>
         </form>
         <h2>Numerot</h2>
-        {this.state.persons.map(person => <li key={person.id}> {person.name}</li>)}
+        {this.state.persons.map(person => <li key={person.id}> {person.name} {person.number}</li>)}
       </div>
     )
   }
