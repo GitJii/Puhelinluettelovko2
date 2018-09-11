@@ -1,5 +1,7 @@
 import React from 'react';
-import AddPersonAndNumber from './components/AddPersonAndNumber';
+import Person from './components/Person';
+import Person from './components/FilterLomake';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -54,23 +56,55 @@ class App extends React.Component {
     this.setState({ newName: event.target.value })
   }
 
+  addPersonAndNumber = (event) => {
+
+    event.preventDefault()
+
+    const personObject = {
+      name: this.state.newName,
+      number: this.state.newNumber,
+      id: this.state.persons.length + 1
+    }
+
+    const double = this.state.persons.find(person => person.name === personObject.name)
+
+    const persons =
+      this.state.persons.includes(double) ?
+        this.state.persons :
+        this.state.persons.concat(personObject)
+
+    this.setState({
+      persons,
+      newNumber: '',
+      newName: ''
+    })
+  }
+
   render() {
-    const personsToShow = 
+    /*
+    const personsToShow =
       this.state.filter === '' ?
-        this.state.persons : 
+        this.state.persons :
         this.state.persons.filter(person =>
-           person.name.includes(this.state.filter))
+          person.name.includes(this.state.filter))
+*/
+
+
+    personsToShow = <FilterLomake tila={this.state} />
+
 
     return (
       <div>
         <h2>Puhelinluettelo</h2>
 
         rajaa näytettäviä <input
-        value = {this.state.filter}
-        onChange= {this.handleFilterChange}
+          value={this.state.filter}
+          onChange={this.handleFilterChange}
         />
-        
+
         <h2>Lisää uusi</h2>
+
+
         <form onSubmit={this.addPersonAndNumber}>
           <div>
             nimi: <input
@@ -89,8 +123,8 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-          {personsToShow.map(person => <li key={person.id}>
-          {person.name} {person.number}</li>)}
+        {personsToShow.map(person => <Person key={person.id}
+          person={person} />)}
       </div>
     )
   }
