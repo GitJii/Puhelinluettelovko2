@@ -1,42 +1,28 @@
 import React from 'react';
 import FilterLomake from './components/FilterLomake';
-
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        {
-          name: 'Arto Hellas',
-          number: '040 2398243',
-          id: 1
-        },
-        {
-          name: 'Arto Vihavainen',
-          number: '040 2398243',
-          id: 2
-        },
-        {
-          name: 'Arto Termospullo',
-          number: '040 2398243',
-          id: 3
-        },
-        {
-          name: 'Arsi Harju',
-          number: '040 2398243',
-          id: 4
-        },
-        {
-          name: 'Pena Markkanen',
-          number: '040 2398243',
-          id: 5
-        }
-      ],
+      persons:[],
       newName: '',
       newNumber: '',
       filter: ''
     }
+  }
+
+  componentDidMount() {
+    console.log('did mount')
+
+    /* const promise = */
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        this.setState({ persons: response.data })
+      })
   }
 
 
@@ -110,7 +96,7 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-          <FilterLomake tila={this.state} />     
+        <FilterLomake tila={this.state} />
       </div>
     )
   }
