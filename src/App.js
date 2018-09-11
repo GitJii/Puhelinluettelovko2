@@ -1,6 +1,6 @@
 import React from 'react';
 import Person from './components/Person';
-import Person from './components/FilterLomake';
+import FilterLomake from './components/FilterLomake';
 
 
 class App extends React.Component {
@@ -81,17 +81,6 @@ class App extends React.Component {
   }
 
   render() {
-    /*
-    const personsToShow =
-      this.state.filter === '' ?
-        this.state.persons :
-        this.state.persons.filter(person =>
-          person.name.includes(this.state.filter))
-*/
-
-
-   const personsToShow = <FilterLomake tila={this.state} />
-
 
     return (
       <div>
@@ -103,7 +92,6 @@ class App extends React.Component {
         />
 
         <h2>Lisää uusi</h2>
-
 
         <form onSubmit={this.addPersonAndNumber}>
           <div>
@@ -123,8 +111,7 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-        {personsToShow.map(person => <Person key={person.id}
-          person={person} />)}
+          <FilterLomake tila={this.state} />     
       </div>
     )
   }

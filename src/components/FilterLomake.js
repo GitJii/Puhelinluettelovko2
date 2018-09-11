@@ -1,6 +1,7 @@
 import React from 'react'
+import Person from './Person'
 
-const FilterLomake = ( tila ) => {
+const FilterLomake = ( {tila} ) => {
     const personsToShow =
       tila.filter === '' ?
         tila.persons :
@@ -8,7 +9,10 @@ const FilterLomake = ( tila ) => {
           person.name.includes(tila.filter))
 
     return(
-        personsToShow
+
+        personsToShow.map(person => <Person key={person.id}
+            person={person} />)
+        
     )
 }
 
