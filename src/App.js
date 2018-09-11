@@ -90,7 +90,7 @@ class App extends React.Component {
 */
 
 
-    personsToShow = <FilterLomake tila={this.state} />
+   const personsToShow = <FilterLomake tila={this.state} />
 
 
     return (
