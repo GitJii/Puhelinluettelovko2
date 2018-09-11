@@ -1,5 +1,4 @@
 import React from 'react';
-import Person from './components/Person';
 import FilterLomake from './components/FilterLomake';
 
 

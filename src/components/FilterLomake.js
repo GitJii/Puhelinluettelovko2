@@ -12,7 +12,6 @@ const FilterLomake = ( {tila} ) => {
 
         personsToShow.map(person => <Person key={person.id}
             person={person} />)
-        
     )
 }
 
