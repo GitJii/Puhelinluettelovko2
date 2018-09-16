@@ -9,7 +9,6 @@ const FilterLomake = ( {tila} ) => {
           person.name.includes(tila.filter))
 
     return(
-
         personsToShow.map(person => <Person key={person.id}
             person={person} />)
     )
