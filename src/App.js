@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterLomake from './components/FilterLomake';
-import axios from 'axios'
+import personService from './services/persons'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,11 +14,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
-    axios
-      .get('http://localhost:3001/persons')
+    personService
+      .getAll()
       .then(response => {
-        this.setState({ persons: response.data })
+        this.setState({ persons: response })
       })
   }
 
@@ -50,24 +49,17 @@ class App extends React.Component {
     const double = this.state.persons.find(person =>
       person.name === personObject.name)
 
-    const persons =
-      this.state.persons.includes(double) ?
-        this.state.persons :
-        this.state.persons.concat(personObject)
-
     if (!this.state.persons.includes(double)) {
-      axios.post('http://localhost:3001/persons', personObject)
-        .then(response => {
-          console.log(response)
+      personService
+        .create(personObject)
+        .then(newPerson => {
+          this.setState({
+            persons: this.state.persons.concat(newPerson),
+            newNumber: '',
+            newName: ''
+          })
         })
-
     }
-
-    this.setState({
-      persons,
-      newNumber: '',
-      newName: ''
-    })
   }
 
   render() {
