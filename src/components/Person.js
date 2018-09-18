@@ -1,9 +1,13 @@
 import React from 'react'
 
 const Person = ({ person }) => {
-    return(
-        <li>{person.name} {person.number}</li>
-    )
+    return (<tbody>
+        <tr>
+            <td>{person.name}</td>
+            <td>{person.number}</td>
+            <td><button type="delete"> poista </button></td>
+        </tr>
+    </tbody>)
 }
 
 export default Person
