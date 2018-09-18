@@ -62,6 +62,28 @@ class App extends React.Component {
     }
   }
 
+  deletePersonAndNumber = (event) => {
+    event.preventDefault()
+
+    const personObject = {
+      name: this.state.newName,
+      number: this.state.newNumber
+    }
+
+    const personsName = personObject.name
+
+    if (this.state.persons.includes(personsName)) {
+      personService
+        .remove(id)
+        .then(() => {
+          const persons =
+            this.state.persons.filter(
+              person => person.id !== id)
+          this.setState({ persons: persons })
+        })
+    }
+  }
+
   render() {
 
     return (
@@ -93,7 +115,10 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-        <FilterLomake tila={this.state} />
+        <FilterLomake
+          tila={this.state}
+          onDelete={this.deletePersonAndNumber}
+        />
       </div>
     )
   }

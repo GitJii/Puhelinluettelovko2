@@ -1,11 +1,15 @@
 import React from 'react'
 
-const Person = ({ person }) => {
+const Person = ({ person }, onDelete) => {
     return (<tbody>
         <tr>
             <td>{person.name}</td>
             <td>{person.number}</td>
-            <td><button type="delete"> poista </button></td>
+            <td>
+                <button
+                    onDelete="delete"> poista
+                </button>
+            </td>
         </tr>
     </tbody>)
 }
