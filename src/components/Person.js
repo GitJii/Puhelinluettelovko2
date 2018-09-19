@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Person = ({ person }, onDelete) => {
+const Person = ({ person }, {onDelete}) => {
+
+    
     return (<tbody>
         <tr>
             <td>{person.name}</td>

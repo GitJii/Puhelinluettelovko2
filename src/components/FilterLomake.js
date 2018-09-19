@@ -1,7 +1,7 @@
 import React from 'react'
 import Person from './Person'
 
-const FilterLomake = ({ tila }) => {
+const FilterLomake = ({ tila }, {onDelete}) => {
     const personsToShow =
         tila.filter === '' ?
             tila.persons :
@@ -11,7 +11,8 @@ const FilterLomake = ({ tila }) => {
     return (
         <table>
             {personsToShow.map(person => <Person key={person.id}
-                person={person} />)}
+                person={person} 
+                onDelete={onDelete}/>)}
         </table>
     )
 }
