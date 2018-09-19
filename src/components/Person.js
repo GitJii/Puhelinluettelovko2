@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Person = ({ person }, {onDelete}) => {
+const Person = ({ person }, onDelete) => {
 
     
     return (<tbody>
@@ -9,7 +9,7 @@ const Person = ({ person }, {onDelete}) => {
             <td>{person.number}</td>
             <td>
                 <button
-                    onDelete="delete"> poista
+                    onClick={onDelete(person.id)}> poista
                 </button>
             </td>
         </tr>

@@ -70,9 +70,12 @@ class App extends React.Component {
       number: this.state.newNumber
     }
 
-    const personsName = personObject.name
+    const person =
+      this.state.persons.find(person =>
+        person.name === personObject.name)
 
-    if (this.state.persons.includes(personsName)) {
+
+    if (this.state.persons.includes(person)) {
       personService
         .remove(id)
         .then(() => {
