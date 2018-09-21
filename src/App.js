@@ -74,14 +74,13 @@ class App extends React.Component {
       this.state.persons.find(person =>
         person.name === personObject.name)
 
-
     if (this.state.persons.includes(person)) {
       personService
-        .remove(id)
+        .remove(person.id)
         .then(() => {
           const persons =
             this.state.persons.filter(
-              person => person.id !== id)
+              p => p.id !== person.id)
           this.setState({ persons: persons })
         })
     }
