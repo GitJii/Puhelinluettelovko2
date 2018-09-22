@@ -1,41 +1,6 @@
 {
   "persons": [
     {
-      "id": 1,
-      "name": "Arto Hellas",
-      "number": "040 2398243"
-    },
-    {
-      "id": 2,
-      "name": "Arto Vihavainen",
-      "number": "040 2398243"
-    },
-    {
-      "id": 3,
-      "name": "Arto Termospullo",
-      "number": "040 2398243"
-    },
-    {
-      "id": 4,
-      "name": "Arsi Harju",
-      "number": "040 2398243"
-    },
-    {
-      "id": 5,
-      "name": "Pena Markkanen",
-      "number": "040 2398243"
-    },
-    {
-      "name": "Tero",
-      "number": "Markkanen",
-      "id": 6
-    },
-    {
-      "name": "Tero",
-      "number": "Markka",
-      "id": 7
-    },
-    {
       "name": "Jake",
       "number": "324098324098",
       "id": 8
