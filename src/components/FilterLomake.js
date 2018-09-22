@@ -1,7 +1,7 @@
 import React from 'react'
 import Person from './Person'
 
-const FilterLomake = ({ tila }, onDelete) => {
+const FilterLomake = ({ tila , onDelete}) => {
     const personsToShow =
         tila.filter === '' ?
             tila.persons :

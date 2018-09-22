@@ -62,25 +62,26 @@ class App extends React.Component {
     }
   }
 
-  deletePersonAndNumber = (event) => {
-    event.preventDefault()
+  deletePersonAndNumber = (id) => {
 
+    const personsid= id
     const personObject = {
       name: this.state.newName,
       number: this.state.newNumber
     }
 
+    console.log('käydään deletePersonAndNumber')
     const person =
       this.state.persons.find(person =>
         person.name === personObject.name)
 
     if (this.state.persons.includes(person)) {
       personService
-        .remove(person.id)
+        .remove(personsid)
         .then(() => {
           const persons =
             this.state.persons.filter(
-              p => p.id !== person.id)
+              p => p.id !== personsid)
           this.setState({ persons: persons })
         })
     }
