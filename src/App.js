@@ -70,7 +70,6 @@ class App extends React.Component {
     }
 
     const changedPerson = { ...personObject, number: personObject.number }
-
     const wantedPerson = this.state.persons.find(p =>
       p.name === personObject.name)
 
@@ -111,7 +110,7 @@ class App extends React.Component {
             this.state.persons.filter(
               p => p.id !== personsid)
           this.setState({
-            error: `${deletedPerson.name}  poistettiin onnistuneesti`,
+            error: ` ${deletedPerson.name}  poistettiin onnistuneesti`,
             persons: persons
           })
           setTimeout(() => {
