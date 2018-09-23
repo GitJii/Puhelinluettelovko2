@@ -63,10 +63,10 @@ class App extends React.Component {
             newNumber: '',
             newName: ''
           })
-        })  
-          setTimeout(() => {
-            this.setState({ error: null })
-          }, 5000)
+        })
+      setTimeout(() => {
+        this.setState({ error: null })
+      }, 5000)
     }
 
     const changedPerson = { ...personObject, number: personObject.number }
@@ -77,12 +77,15 @@ class App extends React.Component {
       if (window.confirm(wantedPerson.name +
         ' on jo luettelossa, korvataanko vanha numero uudella?')
       )
+
+      console.log(changedPerson)
+
         personService
           .update(wantedPerson.id, changedPerson)
           .then(changedPerson => {
             this.setState({
-              error: `Henkilön ${wantedPerson.name} numero muutettiin onnistuneesti. Päivitä sivu, niin näet muutoksen.`,
-              persons: this.state.persons.map(p => p.id !== personObject.id ? p : changedPerson),
+              error: `Henkilön ${wantedPerson.name} numero muutettiin onnistuneesti.`,
+              persons: this.state.persons.map(p => p.id !== wantedPerson.id ? p : changedPerson), 
               newNumber: '',
               newName: ''
             })
@@ -90,6 +93,12 @@ class App extends React.Component {
               this.setState({ error: null })
             }, 5000)
           })
+          .catch(
+            this.setState({
+              error: `Henkilö ${wantedPerson.name} on jo valitettavasti poistettu palvelimelta`,
+              persons: this.state.persons.filter(p => p.id !== wantedPerson.id)
+            })
+          )
     }
   }
 
