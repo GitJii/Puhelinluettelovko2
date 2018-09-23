@@ -1,6 +1,8 @@
 import React from 'react';
 import FilterLomake from './components/FilterLomake';
-import personService from './services/persons'
+import personService from './services/persons';
+import Notification from './components/Notification';
+import './index.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +11,8 @@ class App extends React.Component {
       persons: [],
       newName: '',
       newNumber: '',
-      filter: ''
+      filter: '',
+      error: null
     }
   }
 
@@ -50,16 +53,20 @@ class App extends React.Component {
       person.name === personObject.name)
 
     if (!this.state.persons.includes(double)) {
-      
+
       personService
         .create(personObject)
         .then(newPerson => {
           this.setState({
+            error: personObject.name + ' lisättiin onnistuneesti',
             persons: this.state.persons.concat(newPerson),
             newNumber: '',
             newName: ''
           })
-        })
+        })  
+          setTimeout(() => {
+            this.setState({ error: null })
+          }, 5000)
     }
 
     const changedPerson = { ...personObject, number: personObject.number }
@@ -75,10 +82,14 @@ class App extends React.Component {
           .update(wantedPerson.id, changedPerson)
           .then(changedPerson => {
             this.setState({
+              error: `Henkilön ${wantedPerson.name} numero muutettiin onnistuneesti. Päivitä sivu, niin näet muutoksen.`,
               persons: this.state.persons.map(p => p.id !== personObject.id ? p : changedPerson),
               newNumber: '',
               newName: ''
             })
+            setTimeout(() => {
+              this.setState({ error: null })
+            }, 5000)
           })
     }
   }
@@ -99,16 +110,24 @@ class App extends React.Component {
           const persons =
             this.state.persons.filter(
               p => p.id !== personsid)
-          this.setState({ persons: persons })
+          this.setState({
+            error: `${deletedPerson.name}  poistettiin onnistuneesti`,
+            persons: persons
+          })
+          setTimeout(() => {
+            this.setState({ error: null })
+          }, 5000)
         })
-
   }
+
 
   render() {
 
     return (
       <div>
         <h2>Puhelinluettelo</h2>
+
+        <Notification message={this.state.error} />
 
         rajaa näytettäviä <input
           value={this.state.filter}
