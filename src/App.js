@@ -50,6 +50,7 @@ class App extends React.Component {
       person.name === personObject.name)
 
     if (!this.state.persons.includes(double)) {
+      
       personService
         .create(personObject)
         .then(newPerson => {
@@ -59,7 +60,26 @@ class App extends React.Component {
             newName: ''
           })
         })
+    }
 
+    const changedPerson = { ...personObject, number: personObject.number }
+
+    const wantedPerson = this.state.persons.find(p =>
+      p.name === personObject.name)
+
+    if (this.state.persons.includes(wantedPerson)) {
+      if (window.confirm(wantedPerson.name +
+        ' on jo luettelossa, korvataanko vanha numero uudella?')
+      )
+        personService
+          .update(wantedPerson.id, changedPerson)
+          .then(changedPerson => {
+            this.setState({
+              persons: this.state.persons.map(p => p.id !== personObject.id ? p : changedPerson),
+              newNumber: '',
+              newName: ''
+            })
+          })
     }
   }
 
@@ -67,20 +87,21 @@ class App extends React.Component {
 
     const personsid = id
     const deletedPerson = this.state.persons.find(person =>
-       person.id === personsid)
-    
-       if (window.confirm('Poistetaanko ' +
-     deletedPerson.name)
-     )
+      person.id === personsid)
 
-    personService
-      .remove(personsid)
-      .then(() => {
-        const persons =
-          this.state.persons.filter(
-            p => p.id !== personsid)
-        this.setState({ persons: persons })
-      })
+    if (window.confirm('Poistetaanko ' +
+      deletedPerson.name)
+    )
+
+      personService
+        .remove(personsid)
+        .then(() => {
+          const persons =
+            this.state.persons.filter(
+              p => p.id !== personsid)
+          this.setState({ persons: persons })
+        })
+
   }
 
   render() {
