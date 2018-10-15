@@ -17,6 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('moi')
     personService
       .getAll()
       .then(response => {
